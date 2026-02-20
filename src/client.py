@@ -8,6 +8,7 @@ import base64
 
 MAX_RETRIES = 3
 RETRY_DELAY = 5  # seconds
+PORT = 8765
 
 logging.basicConfig(
     level=logging.INFO,
@@ -24,7 +25,7 @@ async def run_client():
     client_id = str(uuid.uuid4())
     while True:
         try:
-            async with websockets.connect("ws://localhost:8765", ping_timeout = None) as websocket:
+            async with websockets.connect(f"ws://localhost:{PORT}", ping_timeout = None) as websocket:
                 logging.info(f"[Client {client_id}]: Client connected to server")
                 retries = 0  # reset retries after successful connection
 
